@@ -6,172 +6,155 @@
 <title>Neopetro T&C Acknowledgement</title>
 
 <style>
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f4f6f8;
-  margin:0;
-  padding:20px;
-}
-
-/* Container */
-.container{
-  max-width:900px;
+body {
+  font-family: Arial;
+  max-width: 800px;
   margin:auto;
-  background:#fff;
-  padding:30px;
-  border-radius:8px;
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  padding:20px;
+  background:#f2f2f2;
 }
-
-/* Header */
-.header{
+h2 {
   text-align:center;
-  margin-bottom:25px;
-}
-.header h1{
-  font-size:22px;
-  margin-bottom:5px;
-}
-.header p{
-  font-size:13px;
-  margin:2px 0;
+  margin-bottom:20px;
 }
 
-/* Form */
-#tcForm{
-  margin-top:20px;
+/* Main Form */
+#tcForm {
+  border:3px solid #003366;
+  border-radius:10px;
+  padding:20px;
+  background:#fff;
 }
 
-label{
-  font-weight:bold;
-  font-size:13px;
-  margin-top:12px;
+label {
   display:block;
+  font-weight:bold;
+  margin-top:10px;
 }
 
 input[type="text"],
 input[type="date"],
-textarea{
+select,
+textarea {
   width:100%;
   padding:8px;
-  font-size:14px;
-  border:1px solid #ccc;
-  border-radius:4px;
-  box-sizing:border-box;
   margin-top:5px;
+  box-sizing:border-box;
 }
 
-textarea{
+textarea {
   height:250px;
   resize:none;
-  background:#fafafa;
+  border:2px solid #003366;
+  padding:10px;
+  background:#f9f9f9;
 }
 
 /* Signature Section */
-.signature-container{
+.signature-container {
   display:flex;
   gap:20px;
-  margin-top:20px;
-  flex-wrap:wrap;
+  margin-top:15px;
+  align-items:flex-start;
 }
 
-.signature-box{
-  max-width:400px;
-  flex:1;
+.signature-box {
+  display:flex;
+  flex-direction:column;
+  width:400px;
 }
 
-.signature-box canvas{
-  border:1px solid #333;
-  width:100%;
+.signature-box canvas {
+  border:1px solid #000;
+  width:400px;
   height:150px;
-  touch-action:none;
 }
 
-#clear-signature{
+#clear-signature {
   margin-top:8px;
   padding:8px;
   font-size:14px;
-  background:#0b5ed7;
+  background:#003366;
   color:#fff;
   border:none;
-  border-radius:4px;
   cursor:pointer;
 }
-#clear-signature:hover{
-  background:#094bb5;
+#clear-signature:hover {
+  background:#005599;
 }
 
-/* Checkbox */
-.side-panel{
+/* Checkbox panel */
+.side-panel {
   flex:1;
 }
-.side-panel label{
+
+.side-panel label {
   font-weight:normal;
-  font-size:14px;
 }
 
-/* Buttons */
-button[type="submit"]{
-  margin-top:25px;
-  padding:12px 30px;
-  font-size:15px;
-  background:#0b5ed7;
-  color:#fff;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
+button[type="submit"] {
+  margin-top:15px;
+  padding:12px;
   width:100%;
+  font-size:16px;
+  background:#003366;
+  color:white;
+  border:none;
+  cursor:pointer;
 }
-button[type="submit"]:hover{
-  background:#094bb5;
+button[type="submit"]:hover {
+  background:#005599;
 }
 
-/* Errors */
-.error{
+.error {
   color:red;
-  font-size:13px;
+  font-size:14px;
+  margin-top:3px;
 }
-.success{
+
+.success {
   color:green;
   font-weight:bold;
   text-align:center;
 }
 
 /* Popup */
-#popup{
+#popup {
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.5);
+  background:rgba(0,0,0,0.5);
   z-index:1000;
 }
-#popupContent{
+
+#popupContent {
   background:#fff;
   padding:25px;
   max-width:420px;
   margin:120px auto;
   border-radius:8px;
   text-align:center;
-  box-shadow:0 4px 12px rgba(0,0,0,.2);
+  border:2px solid #003366;
 }
-.popup-btn{
+
+.popup-btn {
   width:100%;
   padding:10px;
   font-size:15px;
   margin-top:10px;
-  background:#0b5ed7;
+  background:#003366;
   color:#fff;
   border:none;
-  border-radius:5px;
   cursor:pointer;
 }
-.popup-btn:hover{
-  background:#094bb5;
+.popup-btn:hover {
+  background:#005599;
 }
-.popup-btn.secondary{
+
+.popup-btn.secondary {
   background:#999;
 }
-.popup-btn.secondary:hover{
+.popup-btn.secondary:hover {
   background:#777;
 }
 </style>
@@ -179,12 +162,7 @@ button[type="submit"]:hover{
 
 <body>
 
-<div class="container">
-
-<div class="header">
-  <h1>NEOPETRO SDN BHD</h1>
-  <p><strong>TERMS & CONDITIONS ACKNOWLEDGEMENT</strong></p>
-</div>
+<h2>NEOPETRO SDN BHD<br>Terms & Conditions</h2>
 
 <form id="tcForm">
 
@@ -192,8 +170,20 @@ button[type="submit"]:hover{
 <input type="text" id="name">
 <div id="nameError" class="error"></div>
 
-<label>Position / Rank *</label>
-<input type="text" id="position">
+<label>Rank / Designation *</label>
+<select id="position">
+  <option value="">-- Please Select --</option>
+  <option>Master</option>
+  <option>Chief Officer</option>
+  <option>Chief Engineer</option>
+  <option>Second Officer</option>
+  <option>Second Engineer</option>
+  <option>Bosun</option>
+  <option>Able Bodied</option>
+  <option>Greaser</option>
+  <option>Oiler</option>
+  <option>Cook</option>
+</select>
 <div id="positionError" class="error"></div>
 
 <label>Date *</label>
@@ -226,12 +216,13 @@ I acknowledge that violation of any policy may result in disciplinary action, up
 
 <div class="signature-container">
 
+  <!-- Signature -->
   <div class="signature-box">
-    <label>Signature *</label>
     <canvas id="signature-pad"></canvas>
     <button type="button" id="clear-signature">Clear Signature</button>
   </div>
 
+  <!-- Checkbox -->
   <div class="side-panel">
     <label>
       <input type="checkbox" id="acknowledgeCheckbox">
@@ -242,23 +233,25 @@ I acknowledge that violation of any policy may result in disciplinary action, up
 
 </div>
 
-<button type="submit">Submit Acknowledgement</button>
+<button type="submit">Submit</button>
+<p id="successMsg" class="success"></p>
 
 </form>
-</div>
 
 <!-- Popup -->
 <div id="popup">
   <div id="popupContent">
     <h3>Submission Recorded</h3>
     <p>Your acknowledgement has been successfully submitted.</p>
+
     <button id="generatePdfBtn" class="popup-btn">Generate PDF</button>
     <button id="closePopupBtn" class="popup-btn secondary">Close</button>
   </div>
 </div>
 
-<!-- JS (UNCHANGED) -->
+<!-- Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script>
@@ -276,16 +269,16 @@ document.getElementById('tcForm').addEventListener('submit', function(e){
 
   let valid = true;
   const name = document.getElementById('name').value.trim();
-  const position = document.getElementById('position').value.trim();
+  const position = document.getElementById('position').value;
   const date = document.getElementById('date').value;
   const checkbox = document.getElementById('acknowledgeCheckbox').checked;
 
   if(!name){nameError.innerText="Full Name is mandatory"; valid=false;}
-  if(!position){positionError.innerText="Position/Rank is mandatory"; valid=false;}
+  if(!position){positionError.innerText="Rank / Designation is mandatory"; valid=false;}
   if(!date){dateError.innerText="Date is mandatory"; valid=false;}
   if(!checkbox){checkboxError.innerText="You must confirm acknowledgment"; valid=false;}
   if(signaturePad.isEmpty()){canvas.style.borderColor='red'; valid=false;}
-  else {canvas.style.borderColor='#333';}
+  else {canvas.style.borderColor='#000';}
 
   if(!valid) return;
 
@@ -308,4 +301,3 @@ document.getElementById('closePopupBtn').onclick = () => {
 
 </body>
 </html>
-
