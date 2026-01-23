@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Neopetro T&C Acknowledgement</title>
 
+<!-- PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <style>
 body{
   font-family:Arial,Helvetica,sans-serif;
@@ -42,10 +45,6 @@ body{
 }
 
 /* Form */
-#tcForm{
-  margin-top:20px;
-}
-
 label{
   font-weight:bold;
   font-size:13px;
@@ -72,7 +71,7 @@ textarea{
   background:#fafafa;
 }
 
-/* Signature Section */
+/* Signature */
 .signature-container{
   display:flex;
   gap:20px;
@@ -135,11 +134,6 @@ button[type="submit"]:hover{
 .error{
   color:red;
   font-size:13px;
-}
-.success{
-  color:green;
-  font-weight:bold;
-  text-align:center;
 }
 
 /* Popup */
@@ -215,32 +209,30 @@ button[type="submit"]:hover{
 </select>
 <div id="positionError" class="error"></div>
 
+<label>Vessel/Office *</label>
+<select id="vessel">
+  <option value="">-- Select Vessel --</option>
+  <option>Office</option>
+  <option>Neopetro 8</option>
+  <option>Neopetro 10</option>
+  <option>Neopetro 11</option>
+  <option>Neopetro 12</option>
+  <option>Neopetro 18</option>
+  <option>NP Explorer</option>
+</select>
+<div id="vesselError" class="error"></div>
+
 <label>Date *</label>
 <input type="date" id="date">
 <div id="dateError" class="error"></div>
 
 <label>Terms & Conditions</label>
 <textarea readonly>
-I acknowledge that I have read, understood, and agree to comply with all NEOPETRO SDN BHD policies and procedures.  
+I acknowledge that I have read, understood, and agree to comply with all NEOPETRO SDN BHD policies and procedures.
 
-I understand that it is my responsibility to:  
-- Stay updated on all relevant company policies and procedures.  
-- Seek clarification from my supervisor or relevant department if unsure about any policy.  
-- Report any breaches or potential violations immediately.  
+I understand that it is my responsibility to stay informed and comply with all applicable company rules, safety requirements, and ethical standards.
 
-The company policies include, but are not limited to:  
-
-1. HSSE & Social Responsibilities Policy  
-2. Marine Operations & Safe Navigation Policy  
-3. Stop Work Authority Policy  
-4. Marine Security & Cyber Protection Policy  
-5. Occupational Health & Human Rights Policy  
-6. Substance Misuse Policy  
-7. No Smoking & Ignition Source Control Policy  
-8. Anti-Harassment & Workplace Conduct Policy  
-9. Governance, Compliance & Operational Excellence Policy  
-
-I acknowledge that violation of any policy may result in disciplinary action, up to and including termination or legal action. I also understand that NEOPETRO SDN BHD may update its policies from time to time, and continued engagement constitutes acceptance of any changes.
+Violation of any policy may result in disciplinary action, up to and including termination or legal action.
 </textarea>
 
 <div class="signature-container">
@@ -276,7 +268,7 @@ I acknowledge that violation of any policy may result in disciplinary action, up
   </div>
 </div>
 
-<!-- JS (UNCHANGED) -->
+<!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
@@ -296,11 +288,13 @@ document.getElementById('tcForm').addEventListener('submit', function(e){
   let valid = true;
   const name = document.getElementById('name').value.trim();
   const position = document.getElementById('position').value.trim();
+  const vessel = document.getElementById('vessel').value.trim();
   const date = document.getElementById('date').value;
   const checkbox = document.getElementById('acknowledgeCheckbox').checked;
 
   if(!name){nameError.innerText="Full Name is mandatory"; valid=false;}
   if(!position){positionError.innerText="Position/Rank is mandatory"; valid=false;}
+  if(!vessel){vesselError.innerText="Vessel is mandatory"; valid=false;}
   if(!date){dateError.innerText="Date is mandatory"; valid=false;}
   if(!checkbox){checkboxError.innerText="You must confirm acknowledgment"; valid=false;}
   if(signaturePad.isEmpty()){canvas.style.borderColor='red'; valid=false;}
@@ -313,6 +307,7 @@ document.getElementById('tcForm').addEventListener('submit', function(e){
   emailjs.send("service_zdyjwv1","template_1a0dwtt",{
     name,
     position,
+    vessel,
     date,
     signature: signatureBase64
   }).then(()=>{
@@ -320,11 +315,22 @@ document.getElementById('tcForm').addEventListener('submit', function(e){
   });
 });
 
+document.getElementById("generatePdfBtn").onclick = () => {
+  html2pdf()
+    .from(document.querySelector(".container"))
+    .set({
+      margin:10,
+      filename:"Neopetro_Terms_Acknowledgement.pdf",
+      html2canvas:{scale:2},
+      jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
+    })
+    .save();
+};
+
 document.getElementById('closePopupBtn').onclick = () => {
-  document.getElementById('popup').style.display="none";
+  location.reload();
 };
 </script>
 
 </body>
 </html>
-
