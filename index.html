@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Neopetro T&C Acknowledgement</title>
 
+<!-- PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <style>
 body{
   font-family:Arial,Helvetica,sans-serif;
@@ -13,6 +16,7 @@ body{
   padding:20px;
 }
 
+/* Container */
 .container{
   max-width:900px;
   margin:auto;
@@ -22,6 +26,7 @@ body{
   box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 
+/* Header */
 .header{
   text-align:center;
   margin-bottom:25px;
@@ -30,7 +35,16 @@ body{
   max-width:180px;
   margin-bottom:10px;
 }
+.header h1{
+  font-size:22px;
+  margin-bottom:5px;
+}
+.header p{
+  font-size:13px;
+  margin:2px 0;
+}
 
+/* Form */
 label{
   font-weight:bold;
   font-size:13px;
@@ -38,23 +52,26 @@ label{
   display:block;
 }
 
-input, select, textarea{
+input[type="text"],
+input[type="date"],
+select,
+textarea{
   width:100%;
   padding:8px;
   font-size:14px;
   border:1px solid #ccc;
   border-radius:4px;
-  margin-top:5px;
   box-sizing:border-box;
+  margin-top:5px;
 }
 
 textarea{
-  height:260px;
+  height:250px;
   resize:none;
   background:#fafafa;
-  white-space:pre-wrap;
 }
 
+/* Signature */
 .signature-container{
   display:flex;
   gap:20px;
@@ -67,7 +84,7 @@ textarea{
   flex:1;
 }
 
-canvas{
+.signature-box canvas{
   border:1px solid #333;
   width:100%;
   height:150px;
@@ -77,31 +94,49 @@ canvas{
 #clear-signature{
   margin-top:8px;
   padding:8px;
+  font-size:14px;
   background:#0b5ed7;
   color:#fff;
   border:none;
   border-radius:4px;
   cursor:pointer;
 }
+#clear-signature:hover{
+  background:#094bb5;
+}
 
+/* Checkbox */
 .side-panel{
   flex:1;
 }
+.side-panel label{
+  font-weight:normal;
+  font-size:14px;
+}
 
+/* Buttons */
 button[type="submit"]{
   margin-top:25px;
-  padding:12px;
-  width:100%;
+  padding:12px 30px;
+  font-size:15px;
   background:#0b5ed7;
   color:#fff;
   border:none;
   border-radius:5px;
-  font-size:15px;
   cursor:pointer;
+  width:100%;
+}
+button[type="submit"]:hover{
+  background:#094bb5;
 }
 
-.error{color:red;font-size:13px;}
+/* Errors */
+.error{
+  color:red;
+  font-size:13px;
+}
 
+/* Popup */
 #popup{
   display:none;
   position:fixed;
@@ -109,7 +144,6 @@ button[type="submit"]{
   background:rgba(0,0,0,.5);
   z-index:1000;
 }
-
 #popupContent{
   background:#fff;
   padding:25px;
@@ -117,45 +151,50 @@ button[type="submit"]{
   margin:120px auto;
   border-radius:8px;
   text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
-
 .popup-btn{
   width:100%;
   padding:10px;
+  font-size:15px;
   margin-top:10px;
   background:#0b5ed7;
   color:#fff;
   border:none;
   border-radius:5px;
+  cursor:pointer;
 }
-
-.popup-btn.secondary{background:#999;}
-
-@media print{
-  .no-break{page-break-inside:avoid;}
-  .page-break{page-break-before:always;}
+.popup-btn:hover{
+  background:#094bb5;
+}
+.popup-btn.secondary{
+  background:#999;
+}
+.popup-btn.secondary:hover{
+  background:#777;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container" id="pdfContent">
+<div class="container">
 
 <div class="header">
-  <img src="NEOPETRO LOGO.png">
-  <h2>NEOPETRO SDN BHD</h2>
+  <img src="NEOPETRO LOGO.png" alt="Neopetro Logo">
+  <h1>NEOPETRO SDN BHD</h1>
   <p><strong>TERMS & CONDITIONS ACKNOWLEDGEMENT</strong></p>
 </div>
 
 <form id="tcForm">
 
 <label>Full Name *</label>
-<input id="name">
+<input type="text" id="name">
+<div id="nameError" class="error"></div>
 
 <label>Position / Rank *</label>
 <select id="position">
-  <option value="">-- Select --</option>
+  <option value="">-- Select Rank --</option>
   <option>Onshore Staff</option>
   <option>Master</option>
   <option>Chief Officer</option>
@@ -168,11 +207,11 @@ button[type="submit"]{
   <option>Oiler</option>
   <option>Cook</option>
 </select>
+<div id="positionError" class="error"></div>
 
-<label>Vessel / Office *</label>
+<label>Vessel *</label>
 <select id="vessel">
-  <option value="">-- Select --</option>
-  <option>Office</option>
+  <option value="">-- Select Vessel --</option>
   <option>Neopetro 8</option>
   <option>Neopetro 10</option>
   <option>Neopetro 11</option>
@@ -180,21 +219,23 @@ button[type="submit"]{
   <option>Neopetro 18</option>
   <option>NP Explorer</option>
 </select>
+<div id="vesselError" class="error"></div>
 
 <label>Date *</label>
 <input type="date" id="date">
+<div id="dateError" class="error"></div>
 
-<div class="page-break"></div>
-
-<div class="no-break">
 <label>Terms & Conditions</label>
 <textarea readonly>
 I acknowledge that I have read, understood, and agree to comply with all NEOPETRO SDN BHD policies and procedures.
-(Full text unchanged)
-</textarea>
-</div>
 
-<div class="signature-container no-break">
+I understand that it is my responsibility to stay informed and comply with all applicable company rules, safety requirements, and ethical standards.
+
+Violation of any policy may result in disciplinary action, up to and including termination or legal action.
+</textarea>
+
+<div class="signature-container">
+
   <div class="signature-box">
     <label>Signature *</label>
     <canvas id="signature-pad"></canvas>
@@ -204,49 +245,90 @@ I acknowledge that I have read, understood, and agree to comply with all NEOPETR
   <div class="side-panel">
     <label>
       <input type="checkbox" id="acknowledgeCheckbox">
-      I confirm that I have read and agree to the above.
+      I confirm that I have read, understood, and agree to comply with the above terms and policies. *
     </label>
+    <div id="checkboxError" class="error"></div>
   </div>
+
 </div>
 
-<button type="submit">Submit</button>
+<button type="submit">Submit Acknowledgement</button>
+
 </form>
 </div>
 
+<!-- Popup -->
 <div id="popup">
   <div id="popupContent">
     <h3>Submission Recorded</h3>
+    <p>Your acknowledgement has been successfully submitted.</p>
     <button id="generatePdfBtn" class="popup-btn">Generate PDF</button>
     <button id="closePopupBtn" class="popup-btn secondary">Close</button>
   </div>
 </div>
 
+<!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script>
-const signaturePad = new SignaturePad(document.getElementById('signature-pad'));
-document.getElementById('clear-signature').onclick=()=>signaturePad.clear();
+const canvas = document.getElementById('signature-pad');
+const signaturePad = new SignaturePad(canvas,{minWidth:1,maxWidth:2});
 
-document.getElementById('generatePdfBtn').onclick=()=>{
-  html2pdf().set({
-    margin:10,
-    filename:'Neopetro_T&C_Acknowledgement.pdf',
-    pagebreak:{mode:'css'},
-    jsPDF:{unit:'mm',format:'a4'},
-    html2canvas:{scale:2},
-  }).from(document.getElementById('pdfContent'))
-  .toPdf().get('pdf').then(pdf=>{
-    const total=pdf.internal.getNumberOfPages();
-    for(let i=1;i<=total;i++){
-      pdf.setPage(i);
-      pdf.setFontSize(9);
-      pdf.text(`Page ${i} of ${total}`,105,290,{align:'center'});
-    }
-  }).save();
+emailjs.init("e11xX_5IIA36HGfyg");
+
+document.getElementById('clear-signature').onclick = () => signaturePad.clear();
+
+document.getElementById('tcForm').addEventListener('submit', function(e){
+  e.preventDefault();
+
+  document.querySelectorAll(".error").forEach(el=>el.innerText="");
+
+  let valid = true;
+  const name = document.getElementById('name').value.trim();
+  const position = document.getElementById('position').value.trim();
+  const vessel = document.getElementById('vessel').value.trim();
+  const date = document.getElementById('date').value;
+  const checkbox = document.getElementById('acknowledgeCheckbox').checked;
+
+  if(!name){nameError.innerText="Full Name is mandatory"; valid=false;}
+  if(!position){positionError.innerText="Position/Rank is mandatory"; valid=false;}
+  if(!vessel){vesselError.innerText="Vessel is mandatory"; valid=false;}
+  if(!date){dateError.innerText="Date is mandatory"; valid=false;}
+  if(!checkbox){checkboxError.innerText="You must confirm acknowledgment"; valid=false;}
+  if(signaturePad.isEmpty()){canvas.style.borderColor='red'; valid=false;}
+  else {canvas.style.borderColor='#333';}
+
+  if(!valid) return;
+
+  const signatureBase64 = signaturePad.toDataURL("image/png");
+
+  emailjs.send("service_zdyjwv1","template_1a0dwtt",{
+    name,
+    position,
+    vessel,
+    date,
+    signature: signatureBase64
+  }).then(()=>{
+    document.getElementById('popup').style.display="block";
+  });
+});
+
+document.getElementById("generatePdfBtn").onclick = () => {
+  html2pdf()
+    .from(document.querySelector(".container"))
+    .set({
+      margin:10,
+      filename:"Neopetro_Terms_Acknowledgement.pdf",
+      html2canvas:{scale:2},
+      jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
+    })
+    .save();
 };
 
-document.getElementById('closePopupBtn').onclick=()=>location.reload();
+document.getElementById('closePopupBtn').onclick = () => {
+  location.reload();
+};
 </script>
 
 </body>
