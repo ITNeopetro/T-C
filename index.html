@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Neopetro T&C Acknowledgement</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
 <style>
 body{
   font-family:Arial,Helvetica,sans-serif;
@@ -79,6 +77,7 @@ button{
   border-radius:5px;
   font-size:14px;
   cursor:pointer;
+  width:100%;
 }
 button:hover{
   opacity:.9;
@@ -110,7 +109,7 @@ button:hover{
 <div class="container">
 
 <div class="header">
-  <img src="NEOPETRO LOGO.png">
+  <img src="NEOPETRO LOGO.png" alt="Neopetro Logo">
   <h1>NEOPETRO SDN BHD</h1>
   <strong>TERMS & CONDITIONS ACKNOWLEDGEMENT</strong>
 </div>
@@ -160,9 +159,14 @@ button:hover{
 <div id="dateError" class="error"></div>
 
 <label>Terms & Conditions</label>
-<textarea readonly>… (unchanged)</textarea>
+<textarea readonly>
+I acknowledge that I have read, understood, and agree to comply with all NEOPETRO SDN BHD policies and procedures.
+
+I understand that it is my responsibility to stay updated and comply with all applicable company requirements.
+</textarea>
 
 <div class="signature-container">
+
   <div class="signature-box">
     <label>Signature *</label>
     <canvas id="signature-pad"></canvas>
@@ -172,10 +176,11 @@ button:hover{
   <div>
     <label>
       <input type="checkbox" id="acknowledgeCheckbox">
-      I confirm that I have read and understood the above.
+      I confirm that I have read, understood, and agree to the above terms. *
     </label>
     <div id="checkboxError" class="error"></div>
   </div>
+
 </div>
 
 <button type="submit">Submit Acknowledgement</button>
@@ -186,6 +191,7 @@ button:hover{
 <div id="popup">
   <div id="popupContent">
     <h3>Submission Recorded</h3>
+    <p>Your acknowledgement has been successfully submitted.</p>
     <button id="closePopupBtn">Close</button>
   </div>
 </div>
@@ -195,28 +201,28 @@ button:hover{
 
 <script>
 const canvas = document.getElementById('signature-pad');
-const signaturePad = new SignaturePad(canvas);
+const signaturePad = new SignaturePad(canvas,{minWidth:1,maxWidth:2});
+
 emailjs.init("e11xX_5IIA36HGfyg");
 
 document.getElementById('clear-signature').onclick = ()=>signaturePad.clear();
 
 document.getElementById('tcForm').addEventListener('submit', function(e){
   e.preventDefault();
-
   document.querySelectorAll('.error').forEach(e=>e.innerText="");
 
   let valid=true;
-  const name=nameInput=name.value.trim();
-  const id_no=idno.value.trim();
-  const positionVal=position.value;
-  const vesselVal=vessel.value;
-  const dateVal=date.value;
+  const name=document.getElementById('name').value.trim();
+  const id_no=document.getElementById('idno').value.trim();
+  const position=document.getElementById('position').value;
+  const vessel=document.getElementById('vessel').value;
+  const date=document.getElementById('date').value;
 
   if(!name){nameError.innerText="Required";valid=false;}
   if(!id_no){idnoError.innerText="Required";valid=false;}
-  if(!positionVal){positionError.innerText="Required";valid=false;}
-  if(!vesselVal){vesselError.innerText="Required";valid=false;}
-  if(!dateVal){dateError.innerText="Required";valid=false;}
+  if(!position){positionError.innerText="Required";valid=false;}
+  if(!vessel){vesselError.innerText="Required";valid=false;}
+  if(!date){dateError.innerText="Required";valid=false;}
   if(!acknowledgeCheckbox.checked){checkboxError.innerText="Required";valid=false;}
   if(signaturePad.isEmpty()){valid=false;}
 
@@ -225,9 +231,9 @@ document.getElementById('tcForm').addEventListener('submit', function(e){
   emailjs.send("service_zdyjwv1","template_1a0dwtt",{
     name,
     id_no,
-    position: positionVal,
-    vessel: vesselVal,
-    date: dateVal,
+    position,
+    vessel,
+    date,
     signature: signaturePad.toDataURL()
   }).then(()=>{
     popup.style.display="block";
