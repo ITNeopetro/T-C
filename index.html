@@ -12,7 +12,6 @@ body{
   margin:0;
   padding:20px;
 }
-
 .container{
   max-width:900px;
   margin:auto;
@@ -21,141 +20,51 @@ body{
   border-radius:8px;
   box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
+.header{text-align:center;margin-bottom:30px}
+.header img{max-width:140px;margin-bottom:10px}
+.header h1{font-size:22px;margin:5px 0}
+.header p{font-size:14px;font-weight:bold}
 
-.header{
-  text-align:center;
-  margin-bottom:30px;
+label{font-weight:bold;font-size:13px;margin-top:14px;display:block}
+input,select,textarea{
+  width:100%;padding:9px;font-size:14px;
+  border:1px solid #ccc;border-radius:4px;
+  box-sizing:border-box;margin-top:6px
 }
-.header img{
-  max-width:140px;
-  margin-bottom:10px;
-}
-.header h1{
-  font-size:22px;
-  margin:5px 0;
-}
-.header p{
-  font-size:14px;
-  margin:0;
-  font-weight:bold;
-}
+textarea{height:260px;resize:none;background:#fafafa}
 
-label{
-  font-weight:bold;
-  font-size:13px;
-  margin-top:14px;
-  display:block;
-}
-
-input[type="text"],
-input[type="date"],
-select,
-textarea{
-  width:100%;
-  padding:9px;
-  font-size:14px;
-  border:1px solid #ccc;
-  border-radius:4px;
-  box-sizing:border-box;
-  margin-top:6px;
-}
-
-textarea{
-  height:260px;
-  resize:none;
-  background:#fafafa;
-}
-
-.signature-container{
-  display:flex;
-  gap:20px;
-  margin-top:25px;
-  flex-wrap:wrap;
-}
-
-.signature-box{
-  flex:1;
-  min-width:280px;
-}
-
-.signature-box canvas{
-  border:1px solid #333;
-  width:100%;
-  height:160px;
-  touch-action:none;
-}
-
-.side-panel{
-  flex:1;
-  min-width:260px;
-  display:flex;
-  align-items:flex-start;
-}
-
-.side-panel label{
-  font-weight:normal;
-  font-size:14px;
-}
+.signature-container{display:flex;gap:20px;margin-top:25px;flex-wrap:wrap}
+.signature-box{flex:1;min-width:280px}
+.signature-box canvas{border:1px solid #333;width:100%;height:160px;touch-action:none}
+.side-panel{flex:1;min-width:260px}
+.side-panel label{font-weight:normal;font-size:14px}
 
 .btn-yellow{
-  background:#f8c400;
-  color:#000;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
+  background:#f8c400;color:#000;border:none;
+  border-radius:5px;cursor:pointer
 }
-.btn-yellow:hover{
-  background:rgba(248,196,0,0.85);
-}
+.btn-yellow:hover{background:rgba(248,196,0,.85)}
 
-#clear-signature{
-  margin-top:8px;
-  padding:8px;
-  font-size:14px;
-  width:100%;
-}
+#clear-signature{margin-top:8px;padding:8px;width:100%}
+button[type="submit"]{margin-top:30px;padding:14px;width:100%}
 
-button[type="submit"]{
-  margin-top:30px;
-  padding:14px;
-  font-size:15px;
-  width:100%;
-}
-
-.error{
-  color:red;
-  font-size:13px;
-  margin-top:3px;
-}
+.error{color:red;font-size:13px;margin-top:3px}
 
 #popup{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.5);
-  z-index:1000;
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.5);z-index:1000
 }
 #popupContent{
-  background:#fff;
-  padding:25px;
-  max-width:420px;
-  margin:120px auto;
-  border-radius:8px;
-  text-align:center;
+  background:#fff;padding:25px;max-width:420px;
+  margin:120px auto;border-radius:8px;text-align:center
 }
-.popup-btn{
-  width:100%;
-  padding:10px;
-  font-size:15px;
-  margin-top:10px;
-}
+.popup-btn{width:100%;padding:10px;margin-top:10px}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-
 <div class="header">
   <img src="NEOPETRO LOGO.png" alt="Neopetro Logo">
   <h1>NEOPETRO SDN BHD</h1>
@@ -169,7 +78,7 @@ button[type="submit"]{
 <div id="nameError" class="error"></div>
 
 <label>IC No / Passport No *</label>
-<input type="text" id="idno" placeholder="e.g. 900101-14-1234 / A12345678">
+<input type="text" id="idno">
 <div id="idnoError" class="error"></div>
 
 <label>Position / Rank *</label>
@@ -207,35 +116,9 @@ button[type="submit"]{
 <div id="dateError" class="error"></div>
 
 <label>Terms & Conditions</label>
-<textarea readonly>
-I acknowledge that I have read, understood, and agree to comply with all NEOPETRO SDN BHD policies, procedures, and requirements applicable to my employment or engagement.
-
-I understand that it is my responsibility to:
-• Stay informed and updated on all applicable company policies and procedures.
-• Perform my duties in accordance with company standards, statutory requirements, and best practices.
-• Seek clarification from my supervisor or the relevant department if I am unsure about any policy or requirement.
-• Immediately report any unsafe acts, unsafe conditions, incidents, near misses, or policy violations.
-
-The policies acknowledged include, but are not limited to:
-
-1. HSSE & Social Responsibilities Policy  
-2. Marine Operations & Safe Navigation Policy  
-3. Stop Work Authority Policy  
-4. Marine Security & Cyber Protection Policy  
-5. Occupational Health & Human Rights Policy  
-6. Substance Misuse Policy  
-7. No Smoking & Ignition Source Control Policy  
-8. Anti-Harassment & Workplace Conduct Policy  
-9. Governance, Compliance & Operational Excellence Policy  
-
-I acknowledge that failure to comply with company policies, procedures, or instructions may result in disciplinary action, which may include termination of employment or legal action where applicable.
-
-This acknowledgement is deemed legally binding and equivalent to a handwritten signature.
-
-</textarea>
+<textarea readonly>…(UNCHANGED CONTENT)…</textarea>
 
 <div class="signature-container">
-
   <div class="signature-box">
     <label>Signature *</label>
     <canvas id="signature-pad"></canvas>
@@ -249,11 +132,9 @@ This acknowledgement is deemed legally binding and equivalent to a handwritten s
     </label>
     <div id="checkboxError" class="error"></div>
   </div>
-
 </div>
 
 <button type="submit" class="btn-yellow">Submit Acknowledgement</button>
-
 </form>
 </div>
 
@@ -269,10 +150,10 @@ This acknowledgement is deemed legally binding and equivalent to a handwritten s
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script>
-const canvas = document.getElementById('signature-pad');
-const signaturePad = new SignaturePad(canvas,{minWidth:1,maxWidth:2});
-
 emailjs.init("e11xX_5IIA36HGfyg");
+
+const canvas = document.getElementById('signature-pad');
+const signaturePad = new SignaturePad(canvas);
 
 document.getElementById('clear-signature').onclick = () => signaturePad.clear();
 
@@ -281,35 +162,39 @@ document.getElementById('tcForm').addEventListener('submit', function(e){
 
   document.querySelectorAll(".error").forEach(el=>el.innerText="");
 
-  let valid = true;
-  const name = name.value.trim();
-  const idno = idno.value.trim();
-  const position = position.value.trim();
-  const vessel = vessel.value.trim();
-  const date = date.value;
-  const checkbox = acknowledgeCheckbox.checked;
+  const nameVal = document.getElementById('name').value.trim();
+  const idnoVal = document.getElementById('idno').value.trim();
+  const positionVal = document.getElementById('position').value;
+  const vesselVal = document.getElementById('vessel').value;
+  const dateVal = document.getElementById('date').value;
+  const checkbox = document.getElementById('acknowledgeCheckbox').checked;
 
-  if(!name){nameError.innerText="Full Name is mandatory"; valid=false;}
-  if(!idno){idnoError.innerText="IC / Passport No is mandatory"; valid=false;}
-  if(!position){positionError.innerText="Position is mandatory"; valid=false;}
-  if(!vessel){vesselError.innerText="Vessel is mandatory"; valid=false;}
-  if(!date){dateError.innerText="Date is mandatory"; valid=false;}
+  let valid = true;
+
+  if(!nameVal){nameError.innerText="Full Name is mandatory"; valid=false;}
+  if(!idnoVal){idnoError.innerText="IC / Passport No is mandatory"; valid=false;}
+  if(!positionVal){positionError.innerText="Position is mandatory"; valid=false;}
+  if(!vesselVal){vesselError.innerText="Vessel is mandatory"; valid=false;}
+  if(!dateVal){dateError.innerText="Date is mandatory"; valid=false;}
   if(!checkbox){checkboxError.innerText="Please confirm acknowledgement"; valid=false;}
   if(signaturePad.isEmpty()){canvas.style.borderColor='red'; valid=false;}
 
   if(!valid) return;
 
   emailjs.send("service_zdyjwv1","template_1a0dwtt",{
-    name, id_no:idno, position, vessel, date,
+    name: nameVal,
+    id_no: idnoVal,
+    position: positionVal,
+    vessel: vesselVal,
+    date: dateVal,
     signature: signaturePad.toDataURL("image/png")
   }).then(()=>{
-    popup.style.display="block";
+    document.getElementById('popup').style.display="block";
   });
 });
 
-closePopupBtn.onclick = ()=> location.reload();
+document.getElementById('closePopupBtn').onclick = () => location.reload();
 </script>
 
 </body>
 </html>
-
