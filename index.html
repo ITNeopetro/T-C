@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Neopetro T&C Acknowledgement</title>
 
-<!-- PDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
 <style>
 body{
   font-family:Arial,Helvetica,sans-serif;
@@ -91,18 +88,24 @@ textarea{
   touch-action:none;
 }
 
+/* BUTTON COLOR – YELLOW */
+.btn-yellow{
+  background:#f8c400;
+  color:#000;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+.btn-yellow:hover{
+  background:rgba(248,196,0,0.85);
+}
+
+/* Clear Signature */
 #clear-signature{
   margin-top:8px;
   padding:8px;
   font-size:14px;
-  background:#0b5ed7;
-  color:#fff;
-  border:none;
-  border-radius:4px;
-  cursor:pointer;
-}
-#clear-signature:hover{
-  background:#094bb5;
+  width:100%;
 }
 
 /* Checkbox */
@@ -114,20 +117,12 @@ textarea{
   font-size:14px;
 }
 
-/* Buttons */
+/* Submit Button */
 button[type="submit"]{
   margin-top:25px;
   padding:12px 30px;
   font-size:15px;
-  background:#0b5ed7;
-  color:#fff;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
   width:100%;
-}
-button[type="submit"]:hover{
-  background:#094bb5;
 }
 
 /* Errors */
@@ -158,20 +153,6 @@ button[type="submit"]:hover{
   padding:10px;
   font-size:15px;
   margin-top:10px;
-  background:#0b5ed7;
-  color:#fff;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-}
-.popup-btn:hover{
-  background:#094bb5;
-}
-.popup-btn.secondary{
-  background:#999;
-}
-.popup-btn.secondary:hover{
-  background:#777;
 }
 </style>
 </head>
@@ -209,7 +190,7 @@ button[type="submit"]:hover{
 </select>
 <div id="positionError" class="error"></div>
 
-<label>Vessel/Office *</label>
+<label>Vessel / Office *</label>
 <select id="vessel">
   <option value="">-- Select Vessel --</option>
   <option>Office</option>
@@ -230,24 +211,23 @@ button[type="submit"]:hover{
 <textarea readonly>
 I acknowledge that I have read, understood, and agree to comply with all NEOPETRO SDN BHD policies and procedures.
 
-I understand that it is my responsibility to: 
-  - Stay updated on all relevant company policies and procedures. 
-  - Seek clarification from my supervisor or relevant department if unsure about any policy. 
-  - Report any breaches or potential violations immediately.
-  
-The company policies include, but are not limited to: 
-  1. HSSE & Social Responsibilities Policy 
-  2. Marine Operations & Safe Navigation Policy 
-  3. Stop Work Authority Policy 
-  4. Marine Security & Cyber Protection Policy 
-  5. Occupational Health & Human Rights Policy 
-  6. Substance Misuse Policy 
-  7. No Smoking & Ignition Source Control Policy 
-  8. Anti-Harassment & Workplace Conduct Policy 
-  9. Governance, Compliance & Operational Excellence Policy 
-  
-I acknowledge that violation of any policy may result in disciplinary action, up to and including termination or legal action. 
-I also understand that NEOPETRO SDN BHD may update its policies from time to time, and continued engagement constitutes acceptance of any changes.
+I understand that it is my responsibility to:
+- Stay updated on all relevant company policies and procedures.
+- Seek clarification from my supervisor or relevant department if unsure about any policy.
+- Report any breaches or potential violations immediately.
+
+The company policies include, but are not limited to:
+1. HSSE & Social Responsibilities Policy
+2. Marine Operations & Safe Navigation Policy
+3. Stop Work Authority Policy
+4. Marine Security & Cyber Protection Policy
+5. Occupational Health & Human Rights Policy
+6. Substance Misuse Policy
+7. No Smoking & Ignition Source Control Policy
+8. Anti-Harassment & Workplace Conduct Policy
+9. Governance, Compliance & Operational Excellence Policy
+
+I acknowledge that violation of any policy may result in disciplinary action, up to and including termination or legal action.
 </textarea>
 
 <div class="signature-container">
@@ -255,7 +235,7 @@ I also understand that NEOPETRO SDN BHD may update its policies from time to tim
   <div class="signature-box">
     <label>Signature *</label>
     <canvas id="signature-pad"></canvas>
-    <button type="button" id="clear-signature">Clear Signature</button>
+    <button type="button" id="clear-signature" class="btn-yellow">Clear Signature</button>
   </div>
 
   <div class="side-panel">
@@ -268,7 +248,7 @@ I also understand that NEOPETRO SDN BHD may update its policies from time to tim
 
 </div>
 
-<button type="submit">Submit Acknowledgement</button>
+<button type="submit" class="btn-yellow">Submit Acknowledgement</button>
 
 </form>
 </div>
@@ -278,8 +258,7 @@ I also understand that NEOPETRO SDN BHD may update its policies from time to tim
   <div id="popupContent">
     <h3>Submission Recorded</h3>
     <p>Your acknowledgement has been successfully submitted.</p>
-    <button id="generatePdfBtn" class="popup-btn">Generate PDF</button>
-    <button id="closePopupBtn" class="popup-btn secondary">Close</button>
+    <button id="closePopupBtn" class="popup-btn btn-yellow">Close</button>
   </div>
 </div>
 
@@ -329,18 +308,6 @@ document.getElementById('tcForm').addEventListener('submit', function(e){
     document.getElementById('popup').style.display="block";
   });
 });
-
-document.getElementById("generatePdfBtn").onclick = () => {
-  html2pdf()
-    .from(document.querySelector(".container"))
-    .set({
-      margin:10,
-      filename:"Neopetro_Terms_Acknowledgement.pdf",
-      html2canvas:{scale:2},
-      jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
-    })
-    .save();
-};
 
 document.getElementById('closePopupBtn').onclick = () => {
   location.reload();
